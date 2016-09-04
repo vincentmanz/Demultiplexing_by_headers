@@ -4,7 +4,8 @@ This srcipt is demultiplexing fastq.gz file based on the header barcode using mu
 
 
 In some cases, sequence barcodes are not provided in a separate file, or a dual barcoding strategy may have been applied during sequencing. From the headers, the script will generate a list of barcodes that will be used to demultiplex the file. 
-	```
+
+```
     Example of headers:
     Dual indexed
         @M01132:152:000000000-AUA7D:1:1102:16025:1335 1:N:0:ACGCAAC+CCGATTG
@@ -17,7 +18,8 @@ In some cases, sequence barcodes are not provided in a separate file, or a dual 
         TNCAGAGGGTGCAAGCGTTAATCGGAATTACTGGGCGTAAAGCGCGCGTAGGTGGTTTGTTAAGTTGGATGTGAAATCCCCGGGCTCAACCTGGGAACTGCATTCAAAACTGACAAGCTAGAGTATGGTAGAGGGTGGTGGAATTTCCTGTGTAGCGGTGAAATGCGTAGATATAGGAAGGAACACCAGTGGCGAAGGCGACCACCTGGACTGAAACTGACACTGAGGGGCGAAAGCGGGGGGGGCAAACG
         +
         ?#5<????DDDDDDDDEEEEFFHHHHHHHHHHHHHHDCCHHFGDEHEH>CCE5AEEHHHHHHHHHHHHHHHHHFFFFHHHHHHEEADEEEEEEEEEEEEEEEEEEEEEEE?BEEEEEEEEEEEAEEEE0?A:?EE)8;)0ACEEECECCECAACEE?>)8CCC?CCA8?88ACC*A*::A??:0?C?.?0:?8884>'.''..'0?8C?C**0:0::?ECEE?############################
-        ```
+       
+```
 
 
 ```
@@ -35,11 +37,10 @@ optional arguments:
   -l LENGTH, --length LENGTH
                         Length of the barcode
   -L LIST, --list LIST  List of barcodes[OPTIONAL]
-  ::
-```
+  ```
 
-List of barcodes 
-The file containing the list of indexes should be identical to the header in the fastq file. 
+List of barcodes:
+	The file containing the list of indexes should be identical to the header in the fastq file. 
 
 
 
