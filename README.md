@@ -17,7 +17,7 @@ In some cases, sequence barcodes are not provided in a separate file, or a dual 
         +
         AAAA>FFFFDBFGFFGGGGGFGEHBBGGHDG?GGAFHFFFGFGDFHEEHHHHFHHHHHHHHHGGEHHHHFFHGFGE>EHGBGHHHHHHGGHHHGHHHHHHGHGGGHCEGHHHHHGHHHHHHEHGFHHHCGEHECFHGGHGHHHHHHHFHDGB@?FG<FGEHHHFHHGHFHGHHHHHHHHHHHHHHEEHHHHGHHHGGHHGGGEECGGFGGGGFGGGGGGEFGFGGFFFGFGGGGGGFBFFFFF/BBFFFFF
 
-    Single indexing
+    Single indexed
         @MISEQ03:64:000000000-A2H3D:1:1101:14358:1530 1:N:0:TCCACAGGAGT
         TNCAGAGGGTGCAAGCGTTAATCGGAATTACTGGGCGTAAAGCGCGCGTAGGTGGTTTGTTAAGTTGGATGTGAAATCCCCGGGCTCAACCTGGGAACTGCATTCAAAACTGACAAGCTAGAGTATGGTAGAGGGTGGTGGAATTTCCTGTGTAGCGGTGAAATGCGTAGATATAGGAAGGAACACCAGTGGCGAAGGCGACCACCTGGACTGAAACTGACACTGAGGGGCGAAAGCGGGGGGGGCAAACG
         +
@@ -64,6 +64,6 @@ optional arguments:
         If you have a list of barcodes:
             python Demultiplex_by_headers.py -i file.fastq.gz -t 8 -l 15 -L index.list
         
-        If you do not have a list of barcodes
+        If you do not have a list of barcodes, not recommended, that take much longer:
             python Demultiplex_by_headers.py -i file.fastq.gz -t 8 -l 15 -m 1000
 ```

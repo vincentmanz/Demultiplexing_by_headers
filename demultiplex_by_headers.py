@@ -22,14 +22,14 @@ indexes_list = []
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-i", "--ifile", type=str, help="Input file", required=True)
-	parser.add_argument("-t", "--thread", type=int, help="Input Number of threads", default=[2])
-	parser.add_argument("-m", "--min_reads", type=int, help="Minimum reads per barcode [OPTIONAL]", default=[1])
-	parser.add_argument("-l", "--length", type=int, help="Length of the barcode", default=[15], required=True)
+	parser.add_argument("-t", "--thread", type=int, help="Input Number of threads", default=2)
+	parser.add_argument("-m", "--min_reads", type=int, help="Minimum reads per barcode [OPTIONAL]", default=1)
+	parser.add_argument("-l", "--length", type=int, help="Length of the barcode", default=15, required=True)
 	parser.add_argument("-L", "--list", type=str, help="List of barcodes[OPTIONAL]")
 
 	args = parser.parse_args()
 	filegz = args.ifile
-	nproc = args.thread
+	nproc = int(args.thread)
 	min_reads_per_barcodes = args.min_reads
 	length = args.length
 
@@ -47,6 +47,7 @@ filename = gzip.open(filegz, 'rt')
 
 
 def demultiplex(barcode):
+
 	'''write the new file with associated barcode'''
 	filename = gzip.open(filegz, 'rt')
 	for seq_record in (SeqIO.parse(filename, "fastq")):
@@ -71,38 +72,42 @@ def parse_file(barcodes_set, iteration):
 		for p in procs:
 			p.join()
 
+
 #print freq_barcodes denovo
 if not indexes_list:
+	sorted_freq_barcodes = {}
 	list_header = []
+	seq_records = SeqIO.parse(filename, "fastq")
+	#sampling the first 1000000 reads
 	for seq_record in SeqIO.parse(filename, "fastq"):
 		list_header.append(seq_record.description[-length:])
-		freq_barcodes = collections.Counter(list_header)
-	number_barcodes = len(freq_barcodes)
+		if len(list_header) == 1000000:
+			break
+	freq_barcodes = collections.Counter(list_header)
 	print('\n\nBarcodes list and abondance:')
 	for key, value in sorted(freq_barcodes.iteritems(), key=lambda (k,v): (v,k)):
 		if value > min_reads_per_barcodes:
+			sorted_freq_barcodes[key] = value
 			print "%s: %s" % (key, value)
-	sorted_freq_barcodes = sorted(freq_barcodes.iteritems(), key=lambda (k,v): (v,k))
+	sorted_freq_barcodes = sorted(sorted_freq_barcodes, key=sorted_freq_barcodes.__getitem__)
+	number_barcodes = len(sorted_freq_barcodes)
 else:
 	number_barcodes = len(indexes_list)
 	sorted_freq_barcodes = indexes_list
 	print '\nNumber of barcodes provided from the file:', number_barcodes
 
+
 #loop x by X according to the number of proc.
+
 start = number_barcodes - nproc
 end = number_barcodes
 if start < 0:
 	start = 0
-
 for bar in (range(int(number_barcodes / nproc + 1))):
 	if start < 0:
 		start = 0
 	iteration = end - start
-	if not indexes_list:
-		barcodes = dict(sorted_freq_barcodes[start:end])
-		barcodes_set = barcodes.keys()
-	else:
-		barcodes_set = sorted_freq_barcodes[start:end]
+	barcodes_set = sorted_freq_barcodes[start:end]
 	parse_file(barcodes_set, iteration)
 	start = start - nproc
 	end = end - nproc
