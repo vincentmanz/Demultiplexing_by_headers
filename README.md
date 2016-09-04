@@ -5,12 +5,12 @@ This script is demultiplexing fastq.gz file based on the header barcode using mu
 
 In some cases, sequence barcodes are not provided in a separate file, or a dual barcoding strategy may have been applied during sequencing. From the headers, the script will generate a list of barcodes that will be used to demultiplex the file. 
 
-#Dependencies 
+##Dependencies 
 	Biopython: [sudo] pip install biopython
 
 
+##Example of headers:
 ```
-**Example of headers:**
     Dual indexed
         @M01132:152:000000000-AUA7D:1:1102:16025:1335 1:N:0:ACGCAAC+CCGATTG
         GGTGATATTGTTTGTTATCGTTTAATATTGCGCTATATTTTAAAAAAGCTATATTTATTCCCGTATATACTCGGCGATTGCTAAATTCACAATTATATTTTTTGTTTATCATTCAATTCAGATAAAAAACAACGATAAATTGATTCTAAAAAAGAAATGAGGTTATAAAGACATTAAGAAAACAGGCAATAAAATATAGCGATCGAAACACGTTAACAAAATGAGTCTCATTATCAGAGTAGGACAACAGG
@@ -25,7 +25,7 @@ In some cases, sequence barcodes are not provided in a separate file, or a dual 
        
 ```
 
-
+##Usage
 ```
 usage: Demultiplex_by_headers2.0.py [-h] -i IFILE [-t THREAD] [-m MIN_READS]
                                     -l LENGTH [-L LIST]
@@ -43,14 +43,12 @@ optional arguments:
   -L LIST, --list LIST  List of barcodes[OPTIONAL]
 ```
 
-List of barcodes:
-	The file containing the list of indexes should be identical to the header in the fastq file. 
 
 
 
 
+##Example:
 ```
-**Example:**
     Dual indexed
         @M01132:152:000000000-AUA7D:1:1102:16025:1335 1:N:0:ACGCAAC+CCGATTG
         GGTGATATTGTTTGTTATCGTTTAATATTGCGCTATATTTTAAAAAAGCTATATTTATTCCCGTATATACTCGGCGATTGCTAAATTCACAATTATATTTTTTGTTTATCATTCAATTCAGATAAAAAACAACGATAAATTGATTCTAAAAAAGAAATGAGGTTATAAAGACATTAAGAAAACAGGCAATAAAATATAGCGATCGAAACACGTTAACAAAATGAGTCTCATTATCAGAGTAGGACAACAGG
@@ -58,7 +56,9 @@ List of barcodes:
         AAAA>FFFFDBFGFFGGGGGFGEHBBGGHDG?GGAFHFFFGFGDFHEEHHHHFHHHHHHHHHGGEHHHHFFHGFGE>EHGBGHHHHHHGGHHHGHHHHHHGHGGGHCEGHHHHHGHHHHHHEHGFHHHCGEHECFHGGHGHHHHHHHFHDGB@?FG<FGEHHHFHHGHFHGHHHHHHHHHHHHHHEEHHHHGHHHGGHHGGGEECGGFGGGGFGGGGGGEFGFGGFFFGFGGGGGGFBFFFFF/BBFFFFF
 
     List barcode:
-        ACGCAAC+CCGATTG
+    The file containing the list of indexes should be identical to the header in the fastq file. 
+
+    ACGCAAC+CCGATTG
     
     Command line:
         If you have a list of barcodes:
