@@ -1,12 +1,16 @@
 In some cases, sequencing centers will put the barcode sequences in the fastq labels before handing it off. It is important to know the exact length of the barcode:
 
-This srcipt is demultiplexing fastq.gz file based on the header barcode using multi processors. 
+This script is demultiplexing fastq.gz file based on the header barcode using multi processors. 
 
 
 In some cases, sequence barcodes are not provided in a separate file, or a dual barcoding strategy may have been applied during sequencing. From the headers, the script will generate a list of barcodes that will be used to demultiplex the file. 
 
+#Dependencies 
+	Biopython: [sudo] pip install biopython
+
+
 ```
-    Example of headers:
+**Example of headers:**
     Dual indexed
         @M01132:152:000000000-AUA7D:1:1102:16025:1335 1:N:0:ACGCAAC+CCGATTG
         GGTGATATTGTTTGTTATCGTTTAATATTGCGCTATATTTTAAAAAAGCTATATTTATTCCCGTATATACTCGGCGATTGCTAAATTCACAATTATATTTTTTGTTTATCATTCAATTCAGATAAAAAACAACGATAAATTGATTCTAAAAAAGAAATGAGGTTATAAAGACATTAAGAAAACAGGCAATAAAATATAGCGATCGAAACACGTTAACAAAATGAGTCTCATTATCAGAGTAGGACAACAGG
@@ -37,7 +41,7 @@ optional arguments:
   -l LENGTH, --length LENGTH
                         Length of the barcode
   -L LIST, --list LIST  List of barcodes[OPTIONAL]
-  ```
+```
 
 List of barcodes:
 	The file containing the list of indexes should be identical to the header in the fastq file. 
@@ -52,11 +56,11 @@ List of barcodes:
         GGTGATATTGTTTGTTATCGTTTAATATTGCGCTATATTTTAAAAAAGCTATATTTATTCCCGTATATACTCGGCGATTGCTAAATTCACAATTATATTTTTTGTTTATCATTCAATTCAGATAAAAAACAACGATAAATTGATTCTAAAAAAGAAATGAGGTTATAAAGACATTAAGAAAACAGGCAATAAAATATAGCGATCGAAACACGTTAACAAAATGAGTCTCATTATCAGAGTAGGACAACAGG
         +
         AAAA>FFFFDBFGFFGGGGGFGEHBBGGHDG?GGAFHFFFGFGDFHEEHHHHFHHHHHHHHHGGEHHHHFFHGFGE>EHGBGHHHHHHGGHHHGHHHHHHGHGGGHCEGHHHHHGHHHHHHEHGFHHHCGEHECFHGGHGHHHHHHHFHDGB@?FG<FGEHHHFHHGHFHGHHHHHHHHHHHHHHEEHHHHGHHHGGHHGGGEECGGFGGGGFGGGGGGEFGFGGFFFGFGGGGGGFBFFFFF/BBFFFFF
-    
-    List file:
+
+    List barcode:
         ACGCAAC+CCGATTG
     
-    Commande line:
+    Command line:
         If you have a list of barcodes:
             python Demultiplex_by_headers.py -i file.fastq.gz -t 8 -l 15 -L index.list
         
