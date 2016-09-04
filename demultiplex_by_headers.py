@@ -107,3 +107,5 @@ for bar in (range(int(number_barcodes / nproc + 1))):
 	start = start - nproc
 	end = end - nproc
 print(datetime.now() - startTime)
+
+print('Done!')
