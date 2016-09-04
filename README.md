@@ -1,11 +1,10 @@
-In some cases, sequencing centers will put the barcode sequences in the fastq labels before handing it off. 
+This script is demultiplexing fastq.gz file based on the header barcode using multi processors. The script is subsampling the fastq file, and return the abundance of the headers that will be used if, you do not have a barcode file.
+
+In some cases, sequencing centers will put the barcode/indexes sequences in the fastq sequence labels/headers before handing it off. 
+
+In some cases, sequence barcodes are not provided in a separate file, or a dual barcoding strategy may have been applied during sequencing. From the headers, the script will generate a list of barcodes that will be used to demultiplex the file. 
 
 It is important to know the exact length of the barcode:
-
-This script is demultiplexing fastq.gz file based on the header barcode using multi processors. 
-
-
-In some cases, sequence barcodes are not provided in a separate file, or a dual barcoding strategy may have been applied during sequencing. From the headers, the script will generate a list of barcodes that will be used to demultiplex the file. The script is subsampling the fastq file, and return the abundance of the headers that will be used. 
 
 ##Dependencies 
 	Biopython: [sudo] pip install biopython
@@ -44,8 +43,6 @@ optional arguments:
                         Length of the barcode
   -L LIST, --list LIST  List of barcodes[OPTIONAL]
 ```
-
-
 
 
 
