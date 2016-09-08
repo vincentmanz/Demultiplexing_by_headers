@@ -53,7 +53,7 @@ def demultiplex(barcode):
 	for seq_record in (SeqIO.parse(filename, "fastq")):
 		header = seq_record.description
 		if header[-length:] == str(barcode):
-			new_file = barcode + '_' + '.fastq.gz'
+			new_file = barcode + '_r' + '.fastq.gz'
 			with gzip.open('./' + now + '/' + new_file, 'a') as file:
 				SeqIO.write(seq_record, file, "fastq")
 
