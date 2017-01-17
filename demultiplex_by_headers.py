@@ -9,7 +9,7 @@ import argparse
 from datetime import datetime
 import sys
 
-
+#note
 startTime = datetime.now()
 
 #make a new directory for the analyses, day/time
